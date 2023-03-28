@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { get } from 'axios';
+import axios from 'axios';
 
 const initialState = {
     loading: false,
@@ -10,7 +10,8 @@ const initialState = {
 // receives action name and calback that creates the payload
 // Generates pending, fulfilled and rejected actions types
 export const fetchUsers = createAsyncThunk('user/fetchUsers', () => {
-    return get('https://jsonplaceholder.typicode.com/users')
+    return axios
+        .get('https://jsonplaceholder.typicode.com/users')
         .then(response => response.data.map(user => user.id));
 })
 
